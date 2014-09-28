@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% block title %}Home
+{% endblock title %}
+{% block body_id %}view_purchase_info{% endblock %}"  
+{% block controller %}
+  ng-controller="AddEditPurchaseInfoController" ng-init="init('{{csrf_token}}', '{{user.id}}', '{{user.userprofile_set.all.0.user_type}}','{{purchase.id}}')"   
+{% endblock controller %}
+{% block content %}
+
+	<div class="contents">
+		{% include 'header.html' %}
+		
+		<div class="form_content">
+			<h2>Purchase No : {{purchase.slno}}</h2>
+			<form name="add_subdealer_content" method="post">{% csrf_token %}
+				<div class="sub_contents">
+					<label>Created By : </label>
+					<span>{{purchase.created_by.first_name}} {{purchase.created_by.first_name}}</span>
+				</div>
+				<div class="sub_contents">
+					<label>Date : </label>
+					<span>{{purchase.date}}</span>
+					<input type="hidden" id="date" name="date" value="{{purchase.date}}">
+				</div>
+				<div class="sub_contents">
+					<label>Dealer PO Number : </label>
+					<span>{{purchase.dealer_po_number}}</span>
+				</div>
+				{% if user.userprofile_set.all.0.user_type == 'clerk' %}
+					<div class="sub_contents">
+						<label>Delivery Order Number : </label>
+						<input type="text" name="delivery_order_number" id="delivery_order_number" value="{{purchase.delivery_order_number}}">
+					</div>
+				{% else %}
+					<div class="sub_contents">
+						<label>Delivery Order Number : </label>
+						<span>{{purchase.delivery_order_number}}</span>
+						<input type="hidden" name="delivery_order_number" id="delivery_order_number" value="{{purchase.delivery_order_number}}">
+					</div>
+				{% endif %}
+				<div class="sub_contents">
+					<label>Dealer/Company Name : </label>
+					<span>{{purchase.dealer_company_name}}</span>
+				</div>
+				<div class="sub_contents">
+					<label>Dealer Purchaser : </label>
+					<span>{{purchase.dealer_purchaser}}</span>
+				</div>
+				{% if user.userprofile_set.all.0.user_type == 'clerk' %}
+					<div class="sub_contents">
+						<label>Dealer Sales Man : </label>
+						<input type="text" name="dealer_sales_man" id="dealer_sales_man" value="{{purchase.dealer_sales_man}}">
+					</div>
+					<div class="sub_contents">
+						<label>Brand : </label>
+						<input type="text" name="brand" id="brand" value="{{purchase.brand}}">
+					</div>
+					<div class="sub_contents">
+						<label>Model : </label>
+						<input type="text" name="model" id="model" value="{{purchase.model}}">
+					</div>
+					<div class="sub_contents">
+						<label>Customer : </label>
+						<input type="text" name="customer" id="customer" value="{{purchase.customer}}">
+					</div>
+					<div class="sub_contents">
+						<label>Telephone Number: </label>
+						<input type="text" name="telephone_number" id="telephone_number" value="{{purchase.telephone_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Mobile Number: </label>
+						<input type="text" name="mobile_number" id="mobile_number" value="{{purchase.mobile_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Block/House Number: </label>
+						<input type="text" name="block_house_number" id="block_house_number" value="{{purchase.block_house_number}}">	
+					</div>
+					<div class="sub_contents">
+						<label>Floor Number : </label>
+						<input type="text" name="floor_number" id="floor_number" value="{{purchase.floor_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Unit Number: </label>
+						<input type="text" name="unit_number" id="unit_number" value="{{purchase.unit_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Building Name: </label>
+						<input type="text" name="building_name" id="building_name" value="{{purchase.building_name}}">
+					</div>
+					<div class="sub_contents">
+						<label>Street Name: </label>
+						<input type="text" name="street_name" id="street_name" value="{{purchase.street_name}}">
+					</div>
+					<div class="sub_contents">
+						<label>Postal Code: </label>
+						<input type="text" name="postal_code" id="postal_code" value="{{purchase.postal_code}}">
+					</div>
+				{% else %}
+
+					<div class="sub_contents">
+						<label>Dealer Sales Man : </label>
+						<span>{{purchase.dealer_sales_man}}</span>
+						<input type="hidden" name="dealer_sales_man" id="dealer_sales_man" value="{{purchase.dealer_sales_man}}">
+					</div>
+					<div class="sub_contents">
+						<label>Brand : </label>
+						<span>{{purchase.brand}}</span>
+						<input type="hidden" name="brand" id="brand" value="{{purchase.brand}}">
+					</div>
+					<div class="sub_contents">
+						<label>Model : </label>
+						<span>{{purchase.model}}</span>
+						<input type="hidden" name="model" id="model" value="{{purchase.model}}">
+					</div>
+					<div class="sub_contents">
+						<label>Customer : </label>
+						<span>{{purchase.customer}}</span>
+						<input type="hidden" name="customer" id="customer" value="{{purchase.customer}}">
+					</div>
+					<div class="sub_contents">
+						<label>Telephone Number: </label>
+						<span name="address" readonly>{{purchase.telephone_number}}</span>
+						<input type="hidden" name="telephone_number" id="telephone_number" value="{{purchase.telephone_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Mobile Number: </label>
+						<span name="address" readonly>{{purchase.mobile_number}}</span>
+						<input type="hidden" name="mobile_number" id="mobile_number" value="{{purchase.mobile_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Block/House Number: </label>
+						<span name="address" readonly>{{purchase.block_house_number}}</span>
+						<input type="hidden" name="block_house_number" id="block_house_number" value="{{purchase.block_house_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Floor Number : </label>
+						<span>{{purchase.floor_number}}</span>
+						<input type="hidden" name="floor_number" id="floor_number" value="{{purchase.floor_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Unit Number: </label>
+						<span name="address" readonly>{{purchase.unit_number}}</span>
+						<input type="hidden" name="unit_number" id="unit_number" value="{{purchase.unit_number}}">
+					</div>
+					<div class="sub_contents">
+						<label>Building Name: </label>
+						<span name="address" readonly>{{purchase.building_name}}</span>
+						<input type="hidden" name="building_name" id="building_name" value="{{purchase.building_name}}">
+					</div>
+					<div class="sub_contents">
+						<label>Street Name: </label>
+						<span name="address" readonly>{{purchase.street_name}}</span>
+						<input type="hidden" name="street_name" id="street_name" value="{{purchase.street_name}}">
+					</div>
+					<div class="sub_contents">
+						<label>Postal Code: </label>
+						<span name="address" readonly>{{purchase.postal_code}}</span>
+						<input type="hidden" name="postal_code" id="postal_code" value="{{purchase.postal_code}}">
+					</div>
+				{% endif %}
+				{% for delivery_details in purchase.delivery_requested_date.all%}
+					{% if user.userprofile_set.all.0.user_type == 'clerk'%}
+						<div class="sub_contents">
+							<label>Quantity : </label>
+							<input type="text" name="quantity" id="quantity" value="{{delivery_details.quantity}}">
+						</div>
+					{% else %}
+						<div class="sub_contents">
+							<label>Quantity : </label>
+							<span>{{delivery_details.quantity}}</span>
+							<input type="hidden" name="quantity" id="quantity" value="{{delivery_details.quantity}}">
+						</div>
+					{% endif %}
+					<div class="sub_contents">
+						<label>Delivery Requested Date : </label>
+						{% if user.userprofile_set.all.0.user_type == 'customer/dealer' or user.is_superuser or user.userprofile_set.all.0.user_type == 'clerk'%}
+							<input type="text" name="delivery_requested_date" value="{{delivery_details.delivery_date|date:'Y-m-j'}}" id="delivery_date" ><br>
+						{% else %}
+							<span> {{delivery_details.delivery_date}} </span>
+							<input type="hidden" name="delivery_requested_date" value="{{delivery_details.delivery_date|date:'Y-m-j'}}" id="delivery_date" ><br>
+						{% endif %}
+					</div>
+				{% endfor %}
+				{% if purchase.delivery_requested_express_delivery%}
+					<div class="sub_contents">
+						<label>Express Delivery : </label>
+						<span>{{purchase.delivery_requested_express_delivery}}</span>
+					</div>
+					<div class="sub_contents">
+						<label>Express Delivery Charge : </label>
+						<span>{{purchase.delivery_requested_charge}} $</span>
+					</div>
+				{% endif %}
+				<div class="sub_contents">
+					<label>Installation Requested Date : </label>
+					{% if user.userprofile_set.all.0.user_type == 'customer/dealer' or user.is_superuser or user.userprofile_set.all.0.user_type == 'clerk'%}
+						<input type="text" name="installation_requested_date" value="{{purchase.installation_requested_date}}" id="installation_date"><br>
+					{% else %}
+						<span> {{purchase.installation_requested_date}} </span>
+						<input type="hidden" name="installation_requested_date" value="{{purchase.installation_requested_date}}" id="installation_date"><br>
+					{% endif %}
+				</div>
+				<div class="sub_contents">
+					<label>Change Charge : </label>
+					<span>{{purchase.date_change_charge}} $</span>
+				</div>
+				<div class="sub_contents">
+					<label>Extra Man Power : </label>
+					{% if user.userprofile_set.all.0.user_type == 'customer/dealer' or user.is_superuser or user.userprofile_set.all.0.user_type == 'clerk'%}
+						<input type="text" name="extra_man_power_request" value="{{purchase.extra_man_power_request}}" id="extra_man_power"><br>
+					{% else %}
+						<span>{{purchase.extra_man_power_request}}</span>
+						<input type="hidden" name="extra_man_power_request" value="{{purchase.extra_man_power_request}}" id="extra_man_power"><br>
+					{% endif %}
+					
+				</div>
+				{% if user.userprofile_set.all.0.user_type == 'clerk'%}
+					<div class="sub_contents">
+						<label>Remarks : </label>
+						<input type="text" name="remarks" id="remarks" value="{{purchase.remarks}}">
+					</div>
+				{% else %}
+					<div class="sub_contents">
+						<label>Remarks : </label>
+						<span type="text" name="remarks" readonly>{{purchase.remarks}}</span>
+						<input type="hidden" name="remarks" id="remarks" value="{{purchase.remarks}}">
+					</div>
+				{% endif %}
+				{% if user.userprofile_set.all.0.user_type == 'internal_technician' or user.is_superuser or user.userprofile_set.all.0.user_type == 'clerk'%}
+					{% if delivery_status %}
+						<div class="sub_contents">
+							<label>Delivery Status : </label>
+							<input type="text" name="delivery_status" value="{{purchase.delivered_status}}" id="delivery_status"><br></span>
+						</div>
+						<div class="sub_contents">
+						<div class="buttons">
+							<input type="submit" value="Save" ng-click="edit_purchase_info()">
+						</div>
+					</div>
+					<div class="sub_contents">
+						<p ng-show="error_flag" class="error_msg">[[error_message]]</p>
+					</div>
+					{% else %}
+					<div class="sub_contents">
+						<label>Delivery Status : </label>
+						<span>{{purchase.delivered_status}}</span>
+						<input type="hidden" name="delivery_status" value="{{purchase.delivered_status}}" id="delivery_status"><br></span>
+					</div>
+					{% endif %}
+				{% else %}
+					<div class="sub_contents">
+						<label>Delivery Status : </label>
+						<span>{{purchase.delivered_status}}</span>
+						<input type="hidden" name="delivery_status" value="{{purchase.delivered_status}}" id="delivery_status"><br></span>
+					</div>
+					
+				{% endif %}
+
+				
+				{% if user.userprofile_set.all.0.user_type == 'customer/dealer' or user.is_superuser or user.userprofile_set.all.0.user_type == 'clerk'%}
+					<div class="sub_contents">
+						<div class="buttons">
+							<input type="submit" value="Save" ng-click="edit_purchase_info()">
+						</div>
+					</div>
+					<div class="sub_contents">
+						<p ng-show="error_flag" class="error_msg">[[error_message]]</p>
+					</div>
+				{% endif %}
+			</form>
+	</div>
+{% endblock content %}

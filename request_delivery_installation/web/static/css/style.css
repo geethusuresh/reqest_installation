@@ -1,0 +1,211 @@
+body {
+	background-color: #FFFFFF;
+    color: #2C3E50;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 20px;
+    margin: 0;
+}
+.main_container {
+	margin: auto;
+	min-height: 300px;
+    width: 100%;
+}
+.login_form {
+	margin: 140px auto auto;
+ 	min-height: 123px;
+    padding: 15px;
+    width: 270px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 12px 0 #888888;
+}
+.signup_form {
+	margin: auto;
+ 	min-height: 123px;
+    padding: 15px;
+    width: 265px;
+}
+form {
+	height: 100%;
+	width: 100%;
+}
+.buttons {
+	margin: 5px 0px 0px 0px;
+}
+.error_msg {
+    color: #ff0000;
+}
+.contents {
+    border-radius: 5px;
+    box-shadow: 5px 5px 12px 0 #888888;
+    min-height: 500px;
+    margin: 60px auto 125px;
+    width: 1024px;
+}
+.nav {
+    width: 100%;
+    height: 60px;
+    padding-top: 30px;
+    background: none repeat scroll 0 0 #ADD8E6;
+    color: #FFFFFF;
+}
+.nav_right {
+    float: right;
+    margin-right: 45px;
+}
+.nav_right a {
+    /*border-right: 1px solid;*/
+    border: 1px solid;
+    color: #FFFFFF;
+    font-size: 13px;
+    padding: 3px;
+    text-decoration: none;
+}
+.last {
+    /*border: none !important ;*/
+}
+.nav_right a:hover {
+    /*border-right: 1px solid;*/
+    border: 1px solid;
+    color: #FFFFFF;
+    font-size: 13px;
+    padding: 3px;
+    text-decoration: none;
+    background-color: #B3B3B3;
+}
+.nav_left{
+    float: left;
+    margin-left: 8px;
+}
+.nav_left p {
+    margin: 0px;
+    font-size: 15px;
+    font-weight: bold;
+}
+h1,h2{
+    text-align: center;
+    padding: 0 0 25px 0;
+    margin-bottom: 0;
+}
+.form_content {
+    width: 44%;
+    height: 100%;
+    padding: 15px 0 15px 0;
+    margin: auto;
+}
+.form_content form {
+    height: 100%;
+    width: 100%;
+    margin: auto;
+}
+.subcontents {
+    width: auto;
+    height: auto;
+    margin: 0 20px 0 20px;
+}
+.subcontent_table td, th {
+    border-color: #E6E6E6;
+    /*padding: 7px;*/
+    padding: 11px;
+}
+th {
+    font-size: 13px;
+}
+
+.subcontent_table {
+    border-color: #E6E6E6;
+    margin: auto;
+    text-align: left;
+    font-size: 14px;
+    margin-top: 30px;
+}
+.subcontent_table th{
+    height: 30px;
+}
+
+.subcontent_table .odd{
+    background-color: #F9F9F9;
+}
+.subcontent_table .even{
+    background-color: #FFFFFF;
+}
+textarea {
+    width: 232px;
+}
+#view_purchase_info .form_content{
+    width:85%;
+}
+#view_purchase_info .form_content label {
+    font-weight: bold;
+}
+#brand_options {
+    width: 235px;
+}
+.sub_contents {
+    width: 235px;
+    height: auto;
+}
+.sub_contents input[type='text'], textarea, select{
+    width: 98%;
+}
+.login_form_contents {
+    width: 235px;
+    height: auto;
+    margin: auto;
+}
+.login_form_contents input[type='text'] , select{
+    width: 98%;
+}
+.error_message {
+    color: #ff0000;
+}
+#password {
+    width: 98%;
+}
+#view_purchase_info .sub_contents {
+    width: 330px;
+    height: auto;
+    margin: auto;
+    margin-bottom: 15px;
+
+}
+#view_purchase_info .sub_contents input[type='text'], input[type="password"]{
+    width: 28%;
+}
+.formrow {
+    display: inline-block;
+    line-height: 15px;
+    margin-bottom: -11px;
+    margin-top: 8px;
+    width: 100%;
+}
+.formtext
+{
+    float:left;
+    width:42%;
+    text-align:right;
+    margin-right:5px;
+}
+.forminput
+{
+    float:right;
+    width:53%;
+    text-align:left;
+    margin-right:15px;
+}
+
+.message {
+    width: 100%;
+    height: 100%;
+    margin: auto auto auto 280px;
+}
+
+.errorClass { border:  1px solid red; }
+
+.messages {
+    color: #0000FF;
+}
+
+#view_purchase_info .formrow {
+    margin-left: -127px;
+}

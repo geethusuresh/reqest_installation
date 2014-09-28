@@ -1,0 +1,223 @@
+{% extends 'base.html' %}
+{% block title %}Add Purchase Info
+{% endblock title %}
+{% block controller %}
+  ng-controller="AddEditPurchaseInfoController" ng-init="init('{{csrf_token}}', '{{user.id}}', '{{user.userprofile_set.all.0.user_type}}', '')"   
+{% endblock controller %}
+{% block body_id %}add_purchase_info{% endblock %}"  
+	
+{% block content %}
+	<div class="contents">
+		{% include 'header.html' %}
+		<div class="add_subdealer"> 
+			<h2>Add Purchase Info</h2>
+			<div class="form_content">
+				<form name="add_subdealer_content">{% csrf_token %}
+					<div class="formrow">
+						<div class="formtext">Date :</div>
+						<div class="forminput"><input type="text" id="date" name="date" value="{{date}}" readonly></div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Dealer PO Number :</div>
+						<div class="forminput"><input type="text" name="dealer_po_number" ng-model="dealer_po_number"></div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Delivery Order Number :</div>
+						<div class="forminput"><input type="text" name="delivery_order_number" ng-model="delivery_order_number"></div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Dealer/Company Name :</div>
+						<div ng-show="not_dealer_flag" class="forminput">
+							<select id="brand_options" ng-model="not_dealer_name" ng-change="add_new_firm()">
+								<option value="select">Select</option>
+								<option value="[[dealer_company_name.name]]" ng-repeat="dealer_company_name in dealer_company_names">[[dealer_company_name.name]]</option>
+								<option value="others">Other</option>
+							</select>
+						</div>
+						<div class="forminput" ng-show="is_dealer_flag">
+							<input type="text" name="firm_name" ng-model="firm_name">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Dealer Purchaser :</div>
+						<div ng-show="dealer_flag" class="forminput">
+							<select id="brand_options" ng-show="dealers.length" ng-model="dealers_name" ng-change="add_new_dealer()">
+								<option value="select">Select</option>
+								<option value="[[dealer.name]]" ng-repeat="dealer in dealers">[[dealer.name]]</option>
+								<option value="others">Other</option>
+							</select>
+						</div>
+						<div class="forminput" ng-show="other_dealer_flag">
+							<input type="text" name="new_dealer" ng-model="new_dealer">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Dealer Sales Man :</div>
+						<div ng-show="purchase_sales_man_flag" class="forminput">
+							<select id="brand_options" ng-show="purchase_sales_men.length" ng-model="existing_purchase_sales_man" ng-change="add_new_purchase_sales_man()">
+								<option value="select">Select</option>
+								<option value="[[purchase_sales_man.name]]" ng-repeat="purchase_sales_man in purchase_sales_men">[[purchase_sales_man.name]]</option>
+								<option value="others">Other</option>
+							</select>
+						</div>
+						<div class="forminput" ng-show="other_purchase_sales_man_flag">
+							<input type="text" name="new_purchase_sales_man" ng-model="new_purchase_sales_man">
+						</div>
+					</div>
+					<br>
+					<br>
+					<br>
+
+					<div class="formrow">
+						<div class="formtext">Brand :</div>
+						<div ng-show="brand_flag" class="forminput">
+							<select id="brand_options"ng-show="brands.length" ng-model="brandname" ng-change="add_new_brand_name()">
+								<option value="select">Select</option>
+								<option value="[[brand.brand_name]]" ng-repeat="brand in brands">[[brand.brand_name]]</option>
+								<option value="others">Other</option>
+							</select>
+						</div>
+						<div class="forminput" ng-show="other_brand_flag" >
+							<input type="text" name="brand" ng-model="new_brand">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Model :</div>
+						<div class="forminput">
+							<input type="text" name="model" ng-model="model">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Quantity :</div>
+						<div class="forminput">
+							<input type="text" name="quantity" ng-model="quantity">
+						</div>	
+					</div>
+					<br>
+					<br>
+					<br>
+					<div class="formrow">
+						<div class="formtext">Customer : </div>
+						<div class="forminput">
+							<input type="text" name="customer" ng-model="customer">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Telephone Number :</div>
+						<div class="forminput">
+							<input type="text" name="telephone_no" ng-model="telephone_no">
+						</div>	
+					</div>
+					<div class="formrow">
+						<div class="formtext">Mobile Number :</div>
+						<div class="forminput">
+							<input type="text" name="mobile_no" ng-model="mobile_no">
+						</div>	
+					</div>
+					<div class="formrow">
+						<div class="formtext">Block/House Number : </div>
+						<div class="forminput">
+							<input type="text" name="block_house_no" ng-model="block_house_no">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Floor Number : </div>
+						<div class="forminput">
+							<input type="text" name="floor_no" ng-model="floor_no">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Unit Number : </div>
+						<div class="forminput">
+							<input type="text" name="unit_no" ng-model="unit_no">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Building Name :</div>
+						<div class="forminput">
+							<input type="text" name="building_name" ng-model="building_name">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Street Name :</div>
+						<div class="forminput">
+							<input type="text" name="street_name" ng-model="street_name">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Postal Code :</div>
+						<div class="forminput">
+							<input type="text" name="postal_code" ng-model="postal_code">
+						</div>
+					</div>
+					
+					<div class="formrow">
+						<div class="formtext">Delivery Requested Date :</div>
+						<div class="forminput">
+							<input type="text" name="delivery_requested_date" id="delivery_date" placeholder="eg: dd-mm-yyyy" onchange="delivery_requested_date_validation()">
+						</div>
+					</div>
+					<div class="formrow" id="is_express_delivery">
+						<div class="formtext">
+						</div>
+						<div class="forminput">
+							<p class="messages" id="express_delivery_message"></p>
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Installation Requested Date :</div>
+						<div class="forminput">
+							<input type="text" name="installation_requested_date" id="installation_date" placeholder="eg: dd-mm-yyyy" onchange="installation_requested_date_validation()">
+						</div>
+					</div>
+					<div class="formrow" id="is_express_installation">
+						<div class="formtext">
+						</div>
+						<div class="forminput">
+							<p class="messages" id="express_installation_message"></p>
+						</div>
+					</div>
+					<br>
+					<br>
+					<br>
+					<div class="formrow">
+						<div class="formtext">Extra Man Power :</div>
+						<div class="forminput">
+							<input type="text" name="extra_man_power" ng-model="extra_man_power">
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext">Remarks :</div>
+						<div class="forminput">
+							<textarea id="text_area" type="text" name="remarks" ng-model="remarks"></textarea>
+						</div>
+					</div> 
+					<div class="formrow">
+						<div class="formtext"></div>
+						<div class="forminput">
+							<div class="buttons">
+								<input type="submit" ng-click="add_purchase_info()" value="Add">
+							</div>
+						</div>
+					</div>
+					<div class="formrow" ng-show="is_express_delivery">
+						<div class="formtext"></div>
+						<div class="forminput">
+							<p ng-show="express_delivery_msg">[[express_delivery_msg]]</p>
+							<p ng-show="express_installation_delivery_msg">[[express_installation_delivery_msg]]</p>
+							Do you want to continue ?
+							<a href="" ng-click="save_purchase_info('yes')">Yes</a>
+							<a href="" ng-click="save_purchase_info('no')">No</a>
+						</div>
+					</div>
+					<div class="formrow">
+						<div class="formtext"></div>
+						<div class="forminput">
+							<p ng-show="error_flag" class="error_msg">[[error_message]]</p>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

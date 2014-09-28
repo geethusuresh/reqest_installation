@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Add Subdealer
+{% endblock title %}
+{% block controller %}
+  ng-controller="AddSubDealerController" ng-init="init('{{csrf_token}}', '{{user.id}}')"   
+{% endblock controller %}
+{% block body_id %}add_subdealer{% endblock %}"  
+	
+{% block content %}
+	<div class="contents">
+		{% include 'header.html' %}
+		<div class="add_subdealer">
+			{% if  message %}
+				<div class="message">
+					<span class="box error_message">{{ message }}</span>
+				</div>
+				
+			{% else %}
+				<h1>Add SubDealer</h1>
+			<div class="form_content">
+				<form name="add_subdealer_content">{% csrf_token %}
+					<div class="sub_contents">
+						<label>First Name</label>
+						<input type="text" name="firstname" ng-model="firstname">
+					</div>
+					<div class="sub_contents">
+						<label>Last Name</label>
+						<input type="text" name="lastname" ng-model="lastname">
+					</div>
+					<div class="sub_contents">
+						<label>Username</label>
+						<input type="text" name="username" ng-model="username">
+					</div>
+					<div class="sub_contents">
+						<label>Password</label>
+						<input type="password" id="password" name="password" ng-model="password">
+					</div>
+					<div class="sub_contents"><label>Email ID</label>
+						<input type="text" name="email" ng-model="email">
+						<label>User Type</label>
+					</div>
+					<div class="sub_contents">
+						<select ng-model="user_type">
+							<option value="select">Select</option>
+							<option value="sub_dealer">Sub Dealer</option>
+						</select>
+					</div>
+					<div class="sub_contents">
+						<p ng-show="error_flag" class="error_msg">[[error_message]]</p>
+					</div>
+					<div class="sub_contents">
+					
+						<div class="buttons">
+							<input type="submit" ng-click="add_subdealer()" value="Add">
+						</div>
+					</div>
+				</form>
+			</div>
+			{% endif %}
+			
+		</div>
+	</div>
+
+{% endblock content %}

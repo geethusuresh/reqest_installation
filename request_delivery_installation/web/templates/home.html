@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Home
+{% endblock title %}
+{% block controller %} 
+	ng-controller="HomeController" ng-init="init('{{csrf_token}}')"   
+{% endblock controller %}
+{% block body_id %}home{% endblock %}"  
+
+{% block content %}
+	<div class="contents">
+		{% include 'header.html' %}
+		<div class="subcontents">
+			{% if user.userprofile_set.all.0.user_type == 'customer/dealer' %}
+				{% include 'puchase_info_list_view_customer_dealer.html' %}
+			{% elif user.userprofile_set.all.0.user_type == 'vendors' %}
+				{% include 'puchase_info_list_view_vendors.html' %}
+			{% elif user.userprofile_set.all.0.user_type == 'clerk' %}
+				{% include 'puchase_info_list_view_clerk.html' %}
+			{% elif user.userprofile_set.all.0.user_type == 'internal_technician' %}
+				{% include 'puchase_info_list_view_internal_technician.html' %}
+			{% else %}
+					<table border="0" class="subcontent_table" cellspacing="0">
+						<tr>
+							<th>Sl No</th>
+							<th>Date</th>
+							<th>Dealer PO Number</th>
+							<th>Dealer/Company Name</th>
+							<th>Dealer Purchaser</th>
+							<th>Dealer Sales Man</th>
+							<th>Brand</th>
+							<th>Model</th>
+							<th>View</th>
+						</tr>
+						{% if purchases %}
+							{% for purchase in purchases %}
+								<tr class="{% cycle 'odd' 'even' %}">
+									<td>{{purchase.slno}}</td>
+									<td>{{purchase.date}}</td>
+									<td>{{purchase.dealer_po_number}}</td>
+									<td>{{purchase.dealer_company_name}}</td>
+									<td>{{purchase.dealer_purchaser}}</td>
+									<td>{{purchase.dealer_sales_man}}</td>
+									<td>{{purchase.brand}}</td>
+									<td>{{purchase.model}}</td>
+									<td><a href="{% url 'purchase_info' purchase_info_id=purchase.id%}">View</a></td>
+								</tr>	
+							{% endfor %}
+						{% endif %}
+					</table>
+			{% endif %}
+			
+		</div>
+	</div>
+{% endblock content%}

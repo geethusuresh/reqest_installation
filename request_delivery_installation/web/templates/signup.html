@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up
+{% endblock title %}
+{% block controller %}
+  ng-controller="SignupController" ng-init="init('{{csrf_token}}')"   
+{% endblock controller %}
+{% block body_id %}signup{% endblock %}"  
+
+{% block content %}
+
+	<div class="contents">
+		{% include 'header.html' %}
+		<div class="signup_form">
+			<h2>Sign Up</h2>
+			<form name="sognup_content">{% csrf_token %}
+				<div class="sub_contents">
+					<label>First Name</label><br>
+					<input type="text" name="firstname" ng-model="firstname"><br>
+				</div>
+				<div class="sub_contents">
+					<label>Last Name</label><br>
+					<input type="text" name="lastname" ng-model="lastname"><br>
+				</div>
+				<div class="sub_contents">
+					<label>Username</label><br>
+					<input type="text" name="username" ng-model="username"><br>
+				</div>
+				<div class="sub_contents">
+					<label>Password</label><br>
+					<input type="password" name="password" id="password" ng-model="password"><br>
+				</div>
+				<div class="sub_contents">
+					<label>Email ID</label><br>
+					<input type="text" name="email" ng-model="email"><br>
+				</div>
+				<div class="sub_contents">
+					<label>User Type</label><br>
+					<select ng-model="user_type" ng-change="is_user_type_vendor()">
+						<option value="select">Select</option>
+						<option value="customer/dealer">Customer/Dealer</option>
+						<option value="clerk">Clerk</option>
+						<option value="internal_technician">Internal Technician</option>
+						<option value="vendors">Vendors</option>
+					</select><br>
+				</div>
+				<div class="sub_contents">
+					<div ng-show="is_vendor">
+						<label>Brand</label>
+						<input type="text" name="brand" ng-model="brand">
+					</div>
+				</div>
+				<div class="sub_contents">
+					<div ng-show="is_dealer">
+						<label>Dealer/Company Name</label>
+						<input type="text" name="dealer_company_name" ng-model="dealer_company_name">
+					</div>
+				</div>
+				<p ng-show="error_flag" class="error_msg">[[error_message]]</p><br>
+				<div class="sub_contents">
+					<div class="buttons">
+						<input type="submit" ng-click="signup()" value="Register">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %}Home
+{% endblock title %}
+{% block body_id %}view_purchase_info{% endblock %}"  
+{% block controller %}
+  ng-controller="AddEditPurchaseInfoController" ng-init="init('{{csrf_token}}', '{{user.id}}', '{{user.userprofile_set.all.0.user_type}}','{{purchase.id}}')"   
+{% endblock controller %}
+{% block content %}
+
+	<div class="contents">
+		{% include 'header.html' %}
+		
+		<div class="form_content">
+			<h2>Purchase No : {{purchase.slno}}</h2>
+			<form name="add_subdealer_content" method="post">{% csrf_token %}
+				{% if user.userprofile_set.all.0.user_type == 'clerk' %}
+					{% include 'purchase_info_clerk_view.html' %}
+				{% elif user.userprofile_set.all.0.user_type == 'customer/dealer' %}
+					{% include 'purchase_info_customer_dealer_view.html'%}
+				{% elif user.is_superuser %}
+					{% include 'purchase_info_admin_view.html'%}
+				{% elif user.userprofile_set.all.0.user_type == 'internal_technician' %}
+					{% include 'purchase_info_internal_technician_view.html'%}
+				{% elif user.userprofile_set.all.0.user_type == 'vendors' %}
+					{% include 'purchase_info_vendors_view.html'%}
+				{% endif %}
+			</form>
+	</div>
+{% endblock content %}
